@@ -95,12 +95,15 @@ internal class DocumentsContractApi(private val plugin: SharedStoragePlugin) :
               }
 
               // the secret are these two lines....
-              packageInfo.applicationInfo.sourceDir = it.path
-              packageInfo.applicationInfo.publicSourceDir = it.path
+              
+              val applicationInfo = requireNotNull(packageInfo.applicationInfo)
+
+              applicationInfo.sourceDir = it.path
+              applicationInfo.publicSourceDir = it.path
 
               val apkIcon: Drawable =
-                packageInfo.applicationInfo.loadIcon(packageManager)
-
+                  applicationInfo.loadIcon(packageManager)
+              
               val bitmap: Bitmap = drawableToBitmap(apkIcon)
 
               val bytes: ByteArray = bitmap.convertToByteArray()
